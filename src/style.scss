@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
+$border-radius: .5rem;
+
 @mixin mobile{
   @media only screen and (max-width: 768px){
     @content;
@@ -8,6 +10,7 @@
 
 *{
   box-sizing: border-box;
+  user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -16,12 +19,13 @@
 }
 
 html, body{
-  min-height: 100%;
+  height: 100%;
 }
 
 body{
   margin: 0;
-  background-color: #F5F5F5;
+  padding: 2rem;
+  background-color: #F0F0F0;
   color: #555;
   font-family: Montserrat, Arial, sans-serif;
   display: flex;
@@ -36,5 +40,66 @@ h1{
 
   @include mobile{
     font-size: 2rem;
+  }
+}
+
+.add{
+  width: 100%;
+  padding: .5rem 1rem;
+  background-color: #FFF;
+  border: 1px solid #EEE;
+  border-radius: $border-radius;
+  box-shadow: 0 2px 1rem #EEE;
+  display: flex;
+  flex-direction: row;
+
+  span{
+    margin-right: 1rem;
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  input{
+    padding: 0;
+    background: none;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    flex: 1;
+  }
+}
+
+.todos{
+  width: 100%;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+
+  & > div{
+    padding: .75rem 1rem;
+    background-color: #FFF;
+    display: flex;
+    align-items: center;
+    border: 1px solid #EEE;
+    border-radius: $border-radius;
+    box-shadow: 0 2px 1rem #EEE;
+
+    input[type=checkbox]{
+      margin-right: .5rem;
+
+      &:checked ~ span:not(.delete){
+        text-decoration: line-through;
+      }
+    }
+
+    span:not(.delete){
+      flex: 1;
+      user-select: text;
+    }
+
+    .delete{
+      cursor: pointer;
+    }
   }
 }
